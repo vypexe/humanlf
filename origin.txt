@@ -2,22 +2,12 @@ huamnlf
 
 humanity last forum
 
-This is an open source project that intend to preserve online forums that is fully human. 
+This is a project that intend to preserve online forums that is fully human. 
 
 With the advent of digital AI, forums like Reddit & online communities will be mainly bots
 (see Dead Internet Theory). This is a project aiming to preserve communities online that is
 fully human, working with the public on identifying what content is 'digital AI' & creating new
 technologies to help preserve humanity's freedom of speech. 
-
-This project aims to innovate these technologies:
-* a general forum that is fully human (> 99% users are human)
-* authentication of a human compared to a digital or physical AI
-* a place where web crawlers/spiders is unable to gather information for AI
-* decentralized payments system that is based on human-human interactions
-* unfiltered raw information with a bias identification system
-* a seperation between where/when AI is allowed and AI is not allowed
-* technologies to withstand cyberattacks 
-...
 
 I think the most interesting point here is "a seperation between where/when AI is allowed and AI is not allowed".
 It is very important to have a place that is not impacted by AI because we need the raw grounded truth. Yet, I 
