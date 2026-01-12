@@ -17,3 +17,12 @@ having a space that is completely grounded in human truth matters a lot for huma
 
 - vypexe
 
+some ways of detecting AI:
+* copy & paste large quantities of text 
+* metadata of images
+* algorithm to estimate letters/word typed per minute on platforms compared to copying/pasting text
+* comparing against existing AI slop
+* using AI to rate flagged posts
+* human intervention/labelling of AI posts
+
+
