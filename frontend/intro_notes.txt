@@ -1,0 +1,58 @@
+index.html is html file for react injection and mounting
+
+index.js is the entry point and finds the root div and renders the Forum component
+
+Forum.js is the main react component on shown on screen
+
+css files tied to styling
+
+Overall flow:
+
+1. Django URL routing
+   - In `humanlf/urls.py`, you include your app’s URLs:
+     path("", include("forum.urls"))
+
+   - In `forum/urls.py`, you map a route:
+     path("api/forum", views.index)
+
+2. Django view  
+   - `views.index` runs when you visit `http://127.0.0.1:8000/api/forum/`.  
+   - It returns JSON:  
+     return JsonResponse({"message": "Welcome to the forum page"})
+
+3. React frontend  
+   - In `Forum.js`, you fetch that endpoint:  
+     ```js
+     useEffect(() => {
+       fetch('http://127.0.0.1:8000/api/landing/')
+         .then(res => res.json())
+         .then(data => console.log(data))
+     }, [])
+     ```  
+   - React runs in the browser on port 3000, calls Django’s API on port 8000, receives the JSON, and displays or logs it.  
+
+So Django serves data, React requests it and renders it in the UI.
+
+UseEffect review:
+- `useEffect(() => { ... }, [])` runs the code inside only once after the component first renders.  
+- `fetch('http://127.0.0.1:8000/api/forum/')` sends a GET request to your Django endpoint.  
+- `.then(res => res.json())` converts the response from text to JSON.  
+- `.then(data => console.log(data))` logs that JSON data in the browser console.
+
+Django vs React:
+Django just sends JSON data as the backend API. 
+React (in `Forum.js`) receives that data and decides how to display it on the webpage. 
+Django handles logic and data, React handles visuals and interaction.
+
+why public/index.html?
+`index.html` is just the empty shell React injects into.
+The `<div id="root"></div>` is where React mounts your whole app.  
+
+When you run `npm start`, React doesn’t reload HTML files. 
+It loads this one HTML once, then JavaScript (`index.js`) 
+dynamically fills that `<div>` with your React components like `Forum.js`.
+
+In other words,
+`index.html` is the static container. React uses JavaScript to inject and update content inside it.
+Each React component (like `Forum.js`) acts like a “page” 
+or section that React swaps in and out dynamically without reloading the HTML file.

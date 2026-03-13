@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.CorsMiddleware", #adds CORS headers to talk with React app to bypass SOP
+    "corsheaders.middleware.CorsMiddleware", #adds CORS headers to talk with React app to bypass SOP
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
