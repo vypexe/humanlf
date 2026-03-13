@@ -25,7 +25,17 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True, related_name="comments")
     updated = models.DateTimeField(auto_now=True, related_name="comments")
     mini_votes = models.IntegerField(default=1)
-    
+    ai_indicator = models.FloatField(
+        default = 5.0,
+        validators = [MinValueValidator(0.0), MaxValueValidator(10.0)]
+    ) # 5 is default, toward 0 is less AI and toward 10 is more AI
+    popularity =  models.FloatField(
+        default = 0.0,
+        validators= [MinValueValidator(0.0, MaxValueValidator(10.0))]
+    ) # need to add subtraction if it's ai --> less popular
+
+
+
 
 
 
