@@ -44,7 +44,7 @@ Django just sends JSON data as the backend API.
 React (in `Forum.js`) receives that data and decides how to display it on the webpage. 
 Django handles logic and data, React handles visuals and interaction.
 
-why public/index.html?
+why public/index.html/index.js
 `index.html` is just the empty shell React injects into.
 The `<div id="root"></div>` is where React mounts your whole app.  
 
@@ -56,3 +56,11 @@ In other words,
 `index.html` is the static container. React uses JavaScript to inject and update content inside it.
 Each React component (like `Forum.js`) acts like a “page” 
 or section that React swaps in and out dynamically without reloading the HTML file.
+
+`index.js` is the bridge between the static `index.html` and your React components.  
+
+Here’s how it fits:  
+1. Browser loads `index.html`, which has `<div id="root"></div>`.  
+2. `index.js` runs automatically, finds that div, and creates a React root with `ReactDOM.createRoot(document.getElementById('root'))`.  
+3. It renders your top-level component (`Forum`) inside that div.  
+4. From there, React controls everything inside the page dynamically without touching the HTML file again (like Forum.js)
