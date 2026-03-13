@@ -22,8 +22,8 @@ class Thread(models.Model):
 class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="comments")
-    created = models.DateTimeField(auto_now_add=True, related_name="comments")
-    updated = models.DateTimeField(auto_now=True, related_name="comments")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     mini_votes = models.IntegerField(default=1)
     ai_indicator = models.FloatField(
         default = 5.0,
