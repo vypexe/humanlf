@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
 
 function Forum() {
-  const [intro, setIntro] = useState('')
+  const [user, setUser] = useState({ new_user: false, username: '' })
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/forum/')
+    //
+    const apiBaseUrl = process.env.REACT_APP_API_URL
+    fetch(`${apiBaseUrl}/api/forum/`, { credentials: 'include' })
       .then(res => res.json())
-      .then(data => setIntro(data.message))
+      .then(data => setUser(data))
   }, [])
 
-  return <h1>{intro || 'Loading...'}</h1>
+  return (
+    <div>
+      <h3>{user.username ? `Welcome ${user.username}` : 'Loading...'}!</h3>
+    </div>
+  )
 }
 
 export default Forum
