@@ -1,9 +1,11 @@
 import uuid
+import json
 
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from forum.models import Thread
 
-
+#GET
 def index(request):
     user = None
     user_id = request.COOKIES.get("user_id")
@@ -23,3 +25,28 @@ def index(request):
     
     response.set_cookie("user_id", user.id, max_age=604800, httponly=True, samesite="Lax")
     return response
+
+#GET: list threads
+# TODO: Paging, update threads, refresh?
+def threads(request):
+    if request.method == "GET":
+        thread_list = Thread.objects.all().order_by("-popularity", "-created")
+        data = []
+
+        for thread in thread_list:
+            data.append({
+                "id": thread.id,
+                "title": thread.title,
+                "author": thread.author,
+                "created": thread.created.isoformat(),
+                "updated": thread.updated,
+                "votes": thread.votes,
+                "ai_indicator": thread.ai_indicator,
+                "popularity": thread.popularity,
+            })
+        
+        response = JsonResponse({"threads": data})
+        return response
+    
+    #elif request.method == "POST":
+
