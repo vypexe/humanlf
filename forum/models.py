@@ -20,7 +20,7 @@ class Thread(models.Model):
 
 #subclass of a singular comment of the thread
 class Comment(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
+    thread = models.ForeignKey(Thread, on_delete = models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="comments")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
