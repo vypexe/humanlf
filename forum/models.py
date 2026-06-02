@@ -5,6 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 #subclass of a singular thread of the forum
 class Thread(models.Model):
     title = models.CharField(max_length=200)
+    content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -21,6 +22,7 @@ class Thread(models.Model):
 #subclass of a singular comment of the thread
 class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete = models.CASCADE, related_name="comments")
+    content = models.TextField()
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name="comments")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -26,7 +26,8 @@ def index(request):
     response.set_cookie("user_id", user.id, max_age=604800, httponly=True, samesite="Lax")
     return response
 
-#GET: list threads
+#GET: list threads ordered by popularity and created
+#POST: create a new thread for an authenticated user
 # TODO: Paging, update threads, refresh?
 def threads(request):
     if request.method == "GET":
@@ -37,9 +38,10 @@ def threads(request):
             data.append({
                 "id": thread.id,
                 "title": thread.title,
-                "author": thread.author,
+                "content": thread.content,
+                "author": thread.author.username,
                 "created": thread.created.isoformat(),
-                "updated": thread.updated,
+                "updated": thread.updated.isoformat(),
                 "votes": thread.votes,
                 "ai_indicator": thread.ai_indicator,
                 "popularity": thread.popularity,
@@ -54,12 +56,26 @@ def threads(request):
             return JsonResponse({"error": "not authenticated"}, status=401)
     
         body = json.loads(request.body)
-        title = body.get(title, "").strip()
+
+        title = body.get("title", "").strip()
         if not title:
             return JsonResponse({"error": "title needed"}, status=400)
+
+        content = body.get("content", "").strip()
+        if not content:
+            return JsonResponse({"error": "content needed"}, status=400)
         
         user = User.objects.filter(id=user_id).first()
-        thread = Thread.objects.create(title=title,author=user)
+        thread = Thread.objects.create(title=title,content=content,author=user)
         
-        return JsonResponse({"id": thread.id, "title": thread.title}, status=201)
+        return JsonResponse({
+            "id": thread.id,
+            "title": thread.title,
+            "content": thread.content,
+            "author": thread.author.username,
+            "created": thread.created.isoformat(),
+            "votes": thread.votes,
+            "ai_indicator": thread.ai_indicator,
+            "popularity": thread.popularity,
+        }, status=201)
 
