@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TopBar from '../components/TopBar'
 
 function HomePage() {
@@ -9,6 +10,7 @@ function HomePage() {
     }
   )
   const [threads, setThreads] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`${apiBaseUrl}/api/forum/`, { 
@@ -25,12 +27,16 @@ function HomePage() {
       .then(res => res.json())
       .then(data => setThreads(data.threads))
   }, [apiBaseUrl])
+  
+  function handleCreateThread(){
+    navigate('/create-thread')
+  }
 
   return (
     <div className = "homepage">
-      
+
       <div className = "header">
-        <TopBar />
+        <TopBar handleCreateThread={handleCreateThread}/>
       </div>
 
       <div className = "user-intro">

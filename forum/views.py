@@ -4,8 +4,10 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from forum.models import Thread
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 #GET: get user information logged in
+@ensure_csrf_cookie
 def index(request):
     user = None
     user_id = request.COOKIES.get("user_id")
