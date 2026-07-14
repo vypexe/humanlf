@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import getCookie from '../utils/csrf'
+import { useNavigate } from 'react-router-dom'
 
 function CreateThread(){
     const apiBaseUrl = process.env.REACT_APP_API_URL //env variable for base url 
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+    const navigate = useNavigate()
 
     function handleSubmit(event){
         event.preventDefault()
@@ -17,7 +19,9 @@ function CreateThread(){
                 'X-CSRFToken': getCookie('csrftoken'),
             },
             body: JSON.stringify({title, content})
-        })
+        }).then(() => {
+            navigate('/');
+        });
     }
 
     return(
