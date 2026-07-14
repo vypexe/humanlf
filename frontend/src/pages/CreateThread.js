@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import getCookie from '../utils/csrf'
 import { useNavigate } from 'react-router-dom'
+import './CreateThread.css'
 
 function CreateThread(){
     const apiBaseUrl = process.env.REACT_APP_API_URL //env variable for base url 
@@ -25,11 +26,14 @@ function CreateThread(){
     }
 
     return(
-      <form onSubmit={handleSubmit}>
+      <div className="create-thread-container">
+        <form className="create-thread-form" onSubmit={handleSubmit}>
             <input value={title} onChange={event => setTitle(event.target.value)} />
             <textarea value={content} onChange={event => setContent(event.target.value)} />
             <button type="submit"> Post </button>
-      </form>
+        </form>
+      </div>
+      
     )
 }
 

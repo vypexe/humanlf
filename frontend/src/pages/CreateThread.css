@@ -1,0 +1,21 @@
+.create-thread-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-thread-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+}
+
+.create-thread-form input,
+.create-thread-form textarea,
+.create-thread-form button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
